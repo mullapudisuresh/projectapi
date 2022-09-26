@@ -1,0 +1,201 @@
+openapi: '3.0.2'
+info:
+  title: MICRO SERVICES CURD OPERATIONS
+  version: '1.0'
+servers:
+  - url: http://localhost:8000
+
+
+paths:
+  /createUser:
+    post:
+      tags:
+        - user
+      description: UserCreate
+      operationId: UserCreate
+      responses:
+        '201':
+          description: UserCreate Sucessfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '400':
+          description: UserCreateFailure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+      requestBody:
+        description: UserCreate
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BODYDATA'
+  /getUser:
+    get:
+      tags:
+        - user
+      description:  GetUser
+      operationId: GetUser
+      responses:
+        '201':
+          description: GetUser Sucessfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BODYDATA'
+        '400':
+          description: GetUser UserCreateFailure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /createQuestion:
+    post: 
+      tags:
+        - user
+      description: question created
+      operationId: question created
+      responses:
+        '201':
+          description: question Sucessfully
+          content: 
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/ApiResponse'
+        '400':
+          description: question failure
+          content: 
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/ApiResponse'        
+      requestBody:
+        description: Question Create
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BODYDATA'
+
+  /getQuestion/{TopicId}:
+    get:
+      tags:
+        - user
+      description:  GetQuestion
+      operationId: GetQuestion
+      parameters:
+        - name: TopicId
+          in: path
+          description: TopicId
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: GetQuestion Sucessfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BODYDATA'
+        '400':
+          description: GetQuestion CreateFailure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+
+  /createAnswer:
+    post: 
+      tags:
+        - user
+      description: answer created
+      operationId: answer created
+      responses:
+        '201':
+          description: answer created Sucessfully
+          content: 
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/ApiResponse'
+        '400':
+          description: answer creation failure
+          content: 
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/ApiResponse'        
+      requestBody:
+        description: Answer Create
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BODYDATA'
+
+  /getAnswer/{Qid}:
+    get:
+      tags:
+        - user
+      description:  GetAnswer
+      operationId: GetAnswer
+      parameters:
+        - name: Qid
+          in: path
+          description: Qid
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: GetQuestion Sucessfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BODYDATA'
+        '400':
+          description: GetQuestion CreateFailure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+
+
+components:
+  schemas:
+    ApiResponse:
+      type: object
+      description:  ResponseInStatusCode
+      properties:
+        code: 
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string    
+          
+    BODYDATA:
+      type: object
+      properties:
+        TopicId: 
+          type: string
+        TopicName:
+          type: string
+        Qid: 
+          type: string
+        Question: 
+          type: string
+        option1:
+          type: string
+        option2:
+          type: string
+        option3:
+          type: string
+        option4:
+          type: string
+        Answer: 
+          type: string
